@@ -5,7 +5,7 @@ This simple module disables DRC (Dynamic Range Control, i.e., compression) if DR
 
 This module behaves as follows:
 
-* 1. check whether this device has been DRC enabled or not.
+* 1. check whether this device has been DRC enabled or not.<br>
     if so, then continue below, else exit.
 
 * 2. copy /vendor/etc/*/audio_policy_configuration*.xml to $MODDIR/system/vendor/etc
