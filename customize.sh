@@ -1,21 +1,19 @@
 #!/system/bin/sh
 
-# Replace audio_policy_configuration*.xml
+. "$MODPATH/functions3.sh"
 
+# Replace audio_policy_configuration*.xml
 REPLACE="
 "
 
-. "$MODPATH/functions3.sh"
-
-# Set the active configuration file name
+# Set the active configuration file name retrieved from the audio policy server
 configXML="`getActivePolicyFile`"
 
 case "$configXML" in
     /vendor/etc/* )
-        # If DRC enabled, modify audio policy configuration to stopt DRC
+        # If DRC is enabled, modify audio policy configuration to stopt DRC
         MAGISKPATH="$(magisk --path)"
         if [ -n "$MAGISKPATH"  -a  -r "$MAGISKPATH/.magisk/mirror${configXML}" ]; then
-            
             # Don't use "$MAGISKPATH/.magisk/mirror/system${configXML}" instead of "$MAGISKPATH/.magisk/mirror${configXML}".
             # In some cases, the former may link to overlaied "${configXML}" by Magisk itself (not original mirrored "${configXML}".
             mirrorConfigXML="$MAGISKPATH/.magisk/mirror${configXML}"
@@ -33,9 +31,13 @@ case "$configXML" in
             REPLACE="/system${configXML} $REPLACE"
         else
             no_need_this_module
+            touch "$MODPATH/skip_mount"
         fi
         ;;
     * )
             policy_file_not_found
+            touch "$MODPATH/skip_mount"
         ;;
 esac
+
+rm "$MODPATH/functions3.sh"

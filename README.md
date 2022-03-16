@@ -1,21 +1,19 @@
 ## DRC (Dynamic Range Control)  remover
 
-This simple module disables DRC (Dynamic Range Control, i.e., compression) if DRC has been enabled in a stock firmware, e.g., smart phones and tablets having an SDM??? or SM???? model numbered SoC internally. <br/>
+This simple module disables DRC (Dynamic Range Control, i.e., a kind of compression) on all audio outputs (a 3.5mm jack, an internal speaker, bluetooth earphones, USB DAC's, etc.) if DRC has been enabled on a stock firmware. For example, smart phones and tablets whose SoC's have an SDM??? or SM???? model number, usually enable DRC on all audio outputs, but whose SoC's have an MT???? model number don't enable DRC on any audio output.<br/>
 <br/>
 
 This module behaves as follows:
-
-* 1. check whether this device has been DRC enabled or not.<br>
-    if so, then continue below, else exit.
-
-* 2. copy /vendor/etc/\*/audio_policy_configuration\*.xml to $MODDIR/system/vendor/etc
-
-* 3. edit $MODDIR/system/vendor/etc/\*/audio_policy_configuration\*.xml to replace
-     'speaker_drc_enabled="true"' with 'speaker_drc_enabled="false"'.
-
-* 4. overlay this modified one on /vendor/etc/\*/audio_policy_configuration\*.xml.
-
-Tested on LineageOS based and ArrowOS ROMs (Android 10 & 11 & 12).
+<ol>
+    <li>Checks whether this device enables DRC  or not. If so, then continues below, else exits.</li>
+    <li>Copies /vendor/etc/\*/audio_policy_configuration\*.xml to $MODDIR/system/vendor/etc</li>
+    <li>Edits $MODDIR/system/vendor/etc/\*/audio_policy_configuration\*.xml to replace
+     'speaker_drc_enabled="true"' with 'speaker_drc_enabled="false"'.</li>
+    <li>Overlays this modified one on /vendor/etc/\*/audio_policy_configuration\*.xml.</li>
+</ol>
+<br/>
+<br/>
+This module has been tested on LineageOS and ArrowOS ROM's, and phh GSI's (Android 10 & 11 & 12, Qualcomm & MediaTek SoC, and Arm32 & Arm64 combinations). 
 
 ## DISCLAIMER
 

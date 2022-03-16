@@ -3,4 +3,4 @@ name=DRC remover
 version=v1.0.0
 versionCode=1000
 author=zyhk
-description=DRC (Dynamic Range Control) remover for an audio policy configuration file.
+description=A remover of DRC (Dynamic Range Control, i.e., compression) sticking to all audio outputs on some major devices.
