@@ -28,7 +28,7 @@ case "$configXML" in
             stopDRC "$mirrorConfigXML" "$modConfigXML"
             chmod 644 "$modConfigXML"
             chmod -R a+rX "$MODPATH/system/vendor/etc"
-            REPLACE="/system${configXML} $REPLACE"
+            REPLACE="/system${configXML}"
         else
             no_need_this_module
             touch "$MODPATH/skip_mount"
