@@ -1,6 +1,6 @@
 ## DRC (Dynamic Range Control)  remover
 
-This simple module disables DRC (Dynamic Range Control, i.e., a kind of compression) on all audio outputs (a 3.5mm jack, an internal speaker, bluetooth earphones, USB DAC's, etc.) if DRC has been enabled on a stock firmware. For example, smart phones and tablets whose SoC's have an SDM??? or SM???? model number usually enable DRC on all audio outputs, but those whose SoC's have an MT???? model number don't enable DRC on any audio output.<br/>
+This simple module disables DRC (Dynamic Range Control, i.e., a kind of compression) on all audio outputs (a 3.5mm jack, an internal speaker, bluetooth earphones, USB DAC's, etc.; You cannot bypass this DRC feature activated in a DAC chip itself even by using a proprietary pseudo USB driver) if DRC has been enabled on a stock firmware. For example, smart phones and tablets whose SoC's have an SDM??? or SM???? model number usually enable DRC on all audio outputs, but those whose SoC's have an MT???? model number don't enable DRC on any audio output.<br/>
 <br/>
 
 This module behaves as follows:
