@@ -11,7 +11,7 @@ configXML="`getActivePolicyFile`"
 
 case "$configXML" in
     /vendor/etc/* )
-        # If DRC is enabled, modify audio policy configuration to stopt DRC
+        # If DRC is enabled, modify audio policy configuration to stop DRC
         MAGISKPATH="$(magisk --path)"
         if [ -n "$MAGISKPATH"  -a  -r "$MAGISKPATH/.magisk/mirror${configXML}" ]; then
             # Don't use "$MAGISKPATH/.magisk/mirror/system${configXML}" instead of "$MAGISKPATH/.magisk/mirror${configXML}".
@@ -20,11 +20,12 @@ case "$configXML" in
         else
             mirrorConfigXML="$configXML"
         fi
-        grep -e "speaker_drc_enabled[[:space:]]*=[[:space:]]*\"true\"" $mirrorConfigXML >"/dev/null" 2>&1
+        grep -e "speaker_drc_enabled[[:space:]]*=[[:space:]]*\"true\"" "$mirrorConfigXML" >"/dev/null" 2>&1
         if [ "$?" -eq 0 ]; then
             modConfigXML="$MODPATH/system${configXML}"
             mkdir -p "${modConfigXML%/*}"
             touch "$modConfigXML"
+            mirrorConfigXML="`getActualConfigXML \"${mirrorConfigXML}\"`"
             stopDRC "$mirrorConfigXML" "$modConfigXML"
             chmod 644 "$modConfigXML"
             chmod -R a+rX "$MODPATH/system/vendor/etc"
@@ -32,12 +33,14 @@ case "$configXML" in
         else
             no_need_this_module
             touch "$MODPATH/skip_mount"
+            rm -f "$MODPATH/service.sh"
+            rm -f "$MODPATH/functions3.sh"
         fi
         ;;
     * )
             policy_file_not_found
             touch "$MODPATH/skip_mount"
+            rm -f "$MODPATH/service.sh"
+            rm -f "$MODPATH/functions3.sh"
         ;;
 esac
-
-rm "$MODPATH/functions3.sh"
