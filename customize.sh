@@ -28,7 +28,7 @@ case "$configXML" in
             mirrorConfigXML="`getActualConfigXML \"${mirrorConfigXML}\"`"
             stopDRC "$mirrorConfigXML" "$modConfigXML"
             chmod 644 "$modConfigXML"
-            chmod -R a+rX "$MODPATH/system/vendor/etc"
+            chmod -R a+rX "${modConfigXML%/*}"
             REPLACE="/system${configXML}"
         else
             no_need_this_module
