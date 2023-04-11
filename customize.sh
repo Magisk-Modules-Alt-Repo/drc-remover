@@ -28,6 +28,8 @@ case "$configXML" in
             mirrorConfigXML="`getActualConfigXML \"${mirrorConfigXML}\"`"
             stopDRC "$mirrorConfigXML" "$modConfigXML"
             chmod 644 "$modConfigXML"
+            chcon u:object_r:vendor_configs_file:s0 "$modConfigXML"
+            chown root:root "$modConfigXML"
             chmod -R a+rX "${modConfigXML%/*}"
             REPLACE="/system${configXML}"
         else

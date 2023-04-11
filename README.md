@@ -26,13 +26,4 @@ This module behaves as follows:
 * I am not responsible for any damage that may occur to your device, so it is your own choice to attempt this module.
 <br/>
 
-## Change logs
-
-# v1.0.0
-* Initial Release
-
-# v1.1.0
-* Fixed a bug on phh GSI's (unmounted in a boot process by phh GSI's)
-* Added support for Xiaomi & OnePlus devices
-
 ##
