@@ -1,5 +1,8 @@
 ## Change logs
 
+# v1.2.1
+* Added support for ColorOS (experimental)
+
 # v1.2.0
 * Fixed some SELinux related bugs for Magisk v26.0's new magic mount feature
 

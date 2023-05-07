@@ -52,12 +52,15 @@ function getActualConfigXML()
         local dir=${1%/*}
         local fname=${1##*/}
         local sname=${fname%.*}
-        
+
         if [ -r "${dir}/${sname}_sec.xml" ]; then
             echo "${dir}/${sname}_sec.xml"
         elif [ -e "${dir}_qssi"  -a  -r "${dir}_qssi/${fname}" ]; then
             # OnePlus stock pattern
             echo "${dir}_qssi/${fname}"
+        elif [ "${dir##*/}"  = "sku_`getprop ro.board.platform`"  -a  -r "${dir%/*}/${fname}" ]; then
+            # OnePlus stock pattern2
+            echo "${dir%/*}/${fname}"
         elif [ -r "${dir}/audio/${fname}" ]; then
             # Xiaomi stock pattern
             echo "${dir}/audio/${fname}"

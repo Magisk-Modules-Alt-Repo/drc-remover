@@ -10,8 +10,9 @@ REPLACE="
 configXML="`getActivePolicyFile`"
 
 case "$configXML" in
-    /vendor/etc/* )
+    /vendor/etc/* | /my_product/etc/* | /odm/etc/* )
         # If DRC is enabled, modify audio policy configuration to stop DRC
+        # /my_product/etc & /odm/etc are for ColorOS (RealmeUI) and OxygenOS(?)
         MAGISKPATH="$(magisk --path)"
         if [ -n "$MAGISKPATH"  -a  -r "$MAGISKPATH/.magisk/mirror${configXML}" ]; then
             # Don't use "$MAGISKPATH/.magisk/mirror/system${configXML}" instead of "$MAGISKPATH/.magisk/mirror${configXML}".

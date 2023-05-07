@@ -1,6 +1,6 @@
 id=drc-remover
 name=DRC remover
-version=v1.2.0
-versionCode=1200
+version=v1.2.1
+versionCode=1201
 author=zyhk
 description=A remover of DRC (Dynamic Range Control, i.e., compression) sticking to all audio outputs on some major devices.
