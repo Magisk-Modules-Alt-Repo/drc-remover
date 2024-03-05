@@ -2,6 +2,10 @@
 
 . "$MODPATH/functions3.sh"
 
+if ! isMagiskMountCompatible; then
+    abort "  ***  Aborted by an incompatible Magisk variant detection. Try again with pure Magisk! ***"
+fi
+
 # Replace audio_policy_configuration*.xml
 REPLACE="
 "
@@ -9,10 +13,10 @@ REPLACE="
 # Set the active configuration file name retrieved from the audio policy server
 configXML="`getActivePolicyFile`"
 
+# configXML is usually placed under "/vendor/etc" (or "/vendor/etc/audio"), but
+# "/my_product/etc" and "/odm/etc" are used on ColorOS (RealmeUI) and OxygenOS(?)
 case "$configXML" in
-    /vendor/etc/* | /my_product/etc/* | /odm/etc/* )
-        # If DRC is enabled, modify audio policy configuration to stop DRC
-        # /my_product/etc & /odm/etc are for ColorOS (RealmeUI) and OxygenOS(?)
+    /vendor/etc/* | /my_product/etc/* | /odm/etc/* | /system/etc/* | /product/etc/* )
         MAGISKPATH="$(magisk --path)"
         if [ -n "$MAGISKPATH"  -a  -r "$MAGISKPATH/.magisk/mirror${configXML}" ]; then
             # Don't use "$MAGISKPATH/.magisk/mirror/system${configXML}" instead of "$MAGISKPATH/.magisk/mirror${configXML}".
@@ -21,8 +25,15 @@ case "$configXML" in
         else
             mirrorConfigXML="$configXML"
         fi
+        
+        # If DRC is enabled, modify audio policy configuration to stop DRC
         grep -e "speaker_drc_enabled[[:space:]]*=[[:space:]]*\"true\"" "$mirrorConfigXML" >"/dev/null" 2>&1
         if [ "$?" -eq 0 ]; then
+            case "${configXML}" in
+                /system/* )
+                    configXML="${configXML#/system}"
+                ;;
+            esac
             modConfigXML="$MODPATH/system${configXML}"
             mkdir -p "${modConfigXML%/*}"
             touch "$modConfigXML"

@@ -3,6 +3,19 @@
 # This script functions will be used in customize.sh and service.sh
 #
 
+# Check whether Magisk magic mount compatible or not
+function isMagiskMountCompatible()
+{
+    local tmp="$(magisk --path)"
+    if [ -z "$tmp" ]; then
+        return 1
+    elif [ -d "${tmp}/.magisk/mirror/vendor" ]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
 function no_need_this_module()
 {
     ui_print "*********************************************************************************"

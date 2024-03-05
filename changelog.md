@@ -1,5 +1,8 @@
 ## Change logs
 
+# v1.2.2
+* Added checking incompatible Magisk variants
+
 # v1.2.1
 * Added support for ColorOS (experimental)
 
