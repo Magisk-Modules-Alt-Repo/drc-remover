@@ -23,7 +23,8 @@ case "$configXML" in
             # In some cases, the former may link to overlaied "${configXML}" by Magisk itself (not original mirrored "${configXML}".
             mirrorConfigXML="$MAGISKPATH/.magisk/mirror${configXML}"
         else
-            mirrorConfigXML="$configXML"
+            original_policy_file_not_found
+            abort " Abort installation!"
         fi
         
         # If DRC is enabled, modify audio policy configuration to stop DRC
@@ -46,15 +47,11 @@ case "$configXML" in
             REPLACE="/system${configXML}"
         else
             no_need_this_module
-            touch "$MODPATH/skip_mount"
-            rm -f "$MODPATH/service.sh"
-            rm -f "$MODPATH/functions3.sh"
+            abort " Abort installation!"
         fi
         ;;
     * )
             policy_file_not_found
-            touch "$MODPATH/skip_mount"
-            rm -f "$MODPATH/service.sh"
-            rm -f "$MODPATH/functions3.sh"
+            abort " Abort installation!"
         ;;
 esac

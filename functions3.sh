@@ -20,8 +20,6 @@ function no_need_this_module()
 {
     ui_print "*********************************************************************************"
     ui_print " This module isn't needed! (because DRC hasn't been enabled on this device)"
-    ui_print " DRC remover doesn't do anything on your device!"
-    ui_print "     Please remove this module after rebooting"
     ui_print "*********************************************************************************"
 }
 
@@ -29,8 +27,13 @@ function policy_file_not_found()
 {
     ui_print "*********************************************************************************"
     ui_print " This module cannot find any audio policy file! "
-    ui_print " DRC remover doesn't do anything on your device!"
-    ui_print "     Please remove this module after rebooting"
+    ui_print "*********************************************************************************"
+}
+
+function original_policy_file_not_found()
+{
+    ui_print "*********************************************************************************"
+    ui_print " This module cannot find any original (unmodified) audio policy file! "
     ui_print "*********************************************************************************"
 }
 
