@@ -1,5 +1,8 @@
 ## Change logs
 
+#v1.2.3
+* Added "compatible Magisk-mirroring" message for incompatible Magisk variants
+
 # v1.2.2
 * Added checking incompatible Magisk variants
 

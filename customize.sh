@@ -1,9 +1,16 @@
 #!/system/bin/sh
 
+[ -z "$(magisk --path)" ] && alias magisk='ksu-magisk'
+
 . "$MODPATH/functions3.sh"
 
 if ! isMagiskMountCompatible; then
-    abort "  ***  Aborted by an incompatible Magisk variant detection. Try again with pure Magisk! ***"
+    abort '  ***
+  Aborted by no Magisk-mirrors:
+    Try again
+      a.) with official Magisk (mounting mirrors)
+      b.) after installing "compatible Magisk-mirroring" Magisk module
+  ***'
 fi
 
 # Replace audio_policy_configuration*.xml
@@ -55,3 +62,5 @@ case "$configXML" in
             abort " Abort installation!"
         ;;
 esac
+
+rm -f "$MODPATH/LICENSE" "$MODPATH/README.md" "$MODPATH/changelog.md"
