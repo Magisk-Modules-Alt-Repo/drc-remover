@@ -23,7 +23,6 @@ This module behaves as follows:
 
 ## DISCLAIMER
 
-* I am not responsible for any damage that may occur to your device, so it is your own choice to attempt this module.
-<br/>
+* I am not responsible for any damage that may occur to your device, so it is your own choice whether to attempt this module or not.
 
 ##

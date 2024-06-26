@@ -1,6 +1,10 @@
 ## Change logs
 
-#v1.2.3
+# v1.2.4
+* Fixed not to output an error message when the mount point isn't symbolically linked under "/system"
+* Changed the way how to get the actual audio policy file path in the service phase because some ROM's fail to execute "dumpsys" in the phase
+
+# v1.2.3
 * Added "compatible Magisk-mirroring" message for incompatible Magisk variants
 
 # v1.2.2

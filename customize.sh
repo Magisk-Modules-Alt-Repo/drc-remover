@@ -29,9 +29,11 @@ case "$configXML" in
             # Don't use "$MAGISKPATH/.magisk/mirror/system${configXML}" instead of "$MAGISKPATH/.magisk/mirror${configXML}".
             # In some cases, the former may link to overlaied "${configXML}" by Magisk itself (not original mirrored "${configXML}".
             mirrorConfigXML="$MAGISKPATH/.magisk/mirror${configXML}"
+            
         else
             original_policy_file_not_found
             abort " Abort installation!"
+            
         fi
         
         # If DRC is enabled, modify audio policy configuration to stop DRC
@@ -52,9 +54,17 @@ case "$configXML" in
             chown root:root "$modConfigXML"
             chmod -R a+rX "${modConfigXML%/*}"
             REPLACE="/system${configXML}"
+            
+            # If "${configXML}" isn't symbolically linked to "$/system/{configXML}", 
+            #   disable Magisk's "magic mount" and mount "${configXML}" by this module itself in "service.sh"
+            if [ ! -e "/system${configXML}" ]; then
+                touch "$MODPATH/skip_mount"
+            fi
+            
         else
             no_need_this_module
             abort " Abort installation!"
+            
         fi
         ;;
     * )
@@ -63,4 +73,4 @@ case "$configXML" in
         ;;
 esac
 
-rm -f "$MODPATH/LICENSE" "$MODPATH/README.md" "$MODPATH/changelog.md"
+rm -f "$MODPATH/LICENSE" "$MODPATH/README.md" "$MODPATH/changelog.md" "$MODPATH/functions3.sh"
