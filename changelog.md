@@ -1,8 +1,12 @@
 ## Change logs
 
+# v1.2.5
+* Changed an error message for no Magisk mirrors
+
 # v1.2.4
 * Fixed not to output an error message when the mount point isn't symbolically linked under "/system"
 * Changed the way how to get the actual audio policy file path in the service phase because some ROM's fail to execute "dumpsys" in the phase
+* Changed a mirroring warning for incompatible Magisk v28.0; Please use [Compatible magisk-mirroring](https://github.com/Magisk-Modules-Alt-Repo/compatible-magisk-mirroring) and Magisk v28.0 together
 
 # v1.2.3
 * Added "compatible Magisk-mirroring" message for incompatible Magisk variants

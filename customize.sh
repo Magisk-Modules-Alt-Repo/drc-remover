@@ -2,19 +2,32 @@
 
 [ -z "$(magisk --path)" ] && alias magisk='ksu-magisk'
 
+# Guards for my other modules
+if [ -e "${MODPATH%/*/*}/modules/hifi-maximizer-mod" ]; then
+    abort '  ***
+  Aborted: detecting "Hifi maximizer" including all features of this module
+  ***'
+fi
+if [ -e "${MODPATH%/*/*}/modules/audio-samplerate-changer" ]; then
+    abort '  ***
+  Aborted: detecting "Audio Samplerate Changer" including all features of this module
+  ***'
+fi
+
 . "$MODPATH/functions3.sh"
 
 if ! isMagiskMountCompatible; then
     abort '  ***
-  Aborted by no Magisk-mirrors:
-    try again either
-      a.) with official Magisk v27.0 (mounting mirrors), or
-      b.) after installing "Compatible Magisk-mirroring" Magisk module and rebooting
+  Aborted by no magisk-mirrors (even including kernelSUs):
+    Try again after reawaking the mirrors
+        by installing my another magisk/kernelSU module
+        "Compatible Magisk-mirroring" and rebooting
+
   ***'
 fi
 
 # Replace audio_policy_configuration*.xml
-REPLACE="
+REPLACEFILES="
 "
 
 # Set the active configuration file name retrieved from the audio policy server
@@ -53,7 +66,7 @@ case "$configXML" in
             chcon u:object_r:vendor_configs_file:s0 "$modConfigXML"
             chown root:root "$modConfigXML"
             chmod -R a+rX "${modConfigXML%/*}"
-            REPLACE="/system${configXML}"
+            REPLACEFILES="/system${configXML}"
             
             # If "${configXML}" isn't symbolically linked to "$/system/{configXML}", 
             #   disable Magisk's "magic mount" and mount "${configXML}" by this module itself in "service.sh"
@@ -74,3 +87,4 @@ case "$configXML" in
 esac
 
 rm -f "$MODPATH/LICENSE" "$MODPATH/README.md" "$MODPATH/changelog.md" "$MODPATH/functions3.sh"
+ui_print_replacelist "${REPLACEFILES}"
